@@ -1,7 +1,6 @@
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 import streamlit as st
 import numpy as np
 
@@ -57,15 +56,6 @@ def sixmonthavgs(data,ticker):
 
 def yearlyavgs(data,ticker): 
     return (data["Close",ticker].rolling(window=252).mean()).fillna(0), (data["Close", ticker] / data["Close", ticker].shift(252) - 1).fillna(0)
-
-def graph(data,ticker):
-
-    close = closing(data,ticker)
-
-    sns.lineplot(x=data.index,y=close)
-
-    plt.show()
-    return
 
 def displaycalculations(data,ticker):
     st.write("Average Closing Price: " + str(round(avgclosingprice(data,ticker),4)))
